@@ -22,21 +22,18 @@ for idx, link in enumerate(links, start=1):
 user_num = int(input("Which link would you like to access (num)? "))
 selected_link = links[user_num - 1]
 
-response = requests.get(selected_link)
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+}
+response = requests.get(selected_link, headers=headers)
 
 soup = BeautifulSoup(response.content, "html.parser")
-headlines = soup.find_all('h3')
+headlines = soup.find_all(['h1', 'h2', 'h3'])
 
 if not headlines:
     print("Error! Please check website!")
 else:
     for headline in headlines:
-        start_value = ord('.')  # ASCII value of '.'
-        numbered_text = ""
-        for i, line in enumerate(headline.text.strip().split('\n'), start=start_value):
-            # Convert the integer back to character
+        for i, line in enumerate(headline.text.strip().split('\n'), start=65):
             char_start = chr(i)
-            # Append character start to line
-            numbered_text += f"{char_start}. {line}\n"
-
-        print(numbered_text)
+            print(f"{char_start}. {line}")
