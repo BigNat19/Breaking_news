@@ -1,3 +1,16 @@
+'''
+Import request, bs4, and search.
+Search the web for user input.
+Store the links in a dictionary and output 10 of them.
+Ask the user to pick one.
+Sends a GET request to the selected page, Includes a User-Agent header
+to make the request look like it's coming from a real browser (helps prevent getting blocked by the site).
+Parses the HTML of the page.
+Searches for all headline tags: <h1>, <h2>, and <h3>.
+If no headlines were found, warns the user.
+Prints the headlines.
+'''
+
 import requests
 from bs4 import BeautifulSoup
 
